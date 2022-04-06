@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-start">
+      <ion-col size="12">
+        <h2>Revisión de C.P. de empleados contra el SAT.</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-between">
+      <ion-col size="6">
+        <ion-item lines="none">
+          <ion-label position="stacked">
+            Selecciona el archivo con el listado de tus empleados
+          </ion-label>
+          <ion-input
+            type="file"
+            (change)="seleccionaArchivo($event)"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button color="secondary" (click)="validarSat()">
+          Validar en SAT
+        </ion-button>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button color="tertiary" (click)="exportarReporte()">
+          Exportar reporte
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="5">
+        <div *ngIf="grafica$ | async as grafica">
+          <canvas
+            baseChart
+            [data]="grafica"
+            [type]="'pie'"
+            [options]="opcionesGrafica"
+          >
+          </canvas>
+        </div>
+      </ion-col>
+      <ion-col size="7">
+        <ion-card class="listado">
+          <ion-row class="ion-text-center">
+            <ion-col size="2">
+              <p><strong>RFC</strong></p>
+            </ion-col>
+            <ion-col size="4">
+              <p><strong>Nombre</strong></p>
+            </ion-col>
+            <ion-col size="2">
+              <p><strong>C.P.</strong></p>
+            </ion-col>
+            <ion-col size="2">
+              <p><strong>Estatus CP</strong></p>
+            </ion-col>
+            <ion-col size="2">
+              <p><strong>Estatus Nombre</strong></p>
+            </ion-col>
+          </ion-row>
+
+          <cdk-virtual-scroll-viewport itemSize="100">
+            <ion-row
+              *cdkVirtualFor="let empleado of (empleados$ | async)"
+              class="ion-align-items-center ion-no-padding"
+            >
+              <ion-col size="2">
+                <h6 class="ion-no-margin">
+                  <ion-text color="primary"> {{empleado.RFC}} </ion-text>
+                </h6>
+              </ion-col>
+              <ion-col size="4">
+                <p class="ion-no-margin">
+                  <strong>
+                    {{empleado.Nombre}} {{empleado.PrimerApellido}}
+                    {{empleado.SegundoApellido}}
+                  </strong>
+                </p>
+              </ion-col>
+              <ion-col size="2" class="ion-text-center">
+                <p class="ion-no-margin">
+                  <ion-text> {{empleado.CP || ''}} </ion-text>
+                </p>
+              </ion-col>
+              <ion-col size="2" class="ion-text-center">
+                <p *ngIf="empleado.validado" class="ion-no-margin">
+                  <ion-text
+                    [color]="empleado.diferenciaCP === true ? 'danger' : 'success'"
+                  >
+                    {{empleado.diferenciaCP ? 'INCORRECTO' : 'CORRECTO'}}
+                  </ion-text>
+                </p>
+                <ion-spinner
+                  *ngIf="empleado.actualizando === true"
+                ></ion-spinner>
+              </ion-col>
+              <ion-col size="2" class="ion-text-center">
+                <p *ngIf="empleado.validado" class="ion-no-margin">
+                  <ion-text
+                    [color]="empleado.diferenciaNombre === true ? 'danger' : 'success'"
+                  >
+                    {{empleado.diferenciaNombre ? 'INCORRECTO' : 'CORRECTO'}}
+                  </ion-text>
+                </p>
+                <ion-spinner
+                  *ngIf="empleado.actualizando === true"
+                ></ion-spinner>
+              </ion-col>
+            </ion-row>
+          </cdk-virtual-scroll-viewport>
+
+          <ion-row
+            *ngFor="let empleado of empleados$ | async"
+            class="ion-align-items-center ion-no-padding"
+          >
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

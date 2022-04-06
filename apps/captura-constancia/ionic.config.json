@@ -1,0 +1,7 @@
+{
+  "name": "captura-constancia",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
