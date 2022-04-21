@@ -1,0 +1,28 @@
+{
+  "root": "apps/captura-constancia-e2e",
+  "sourceRoot": "apps/captura-constancia-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/captura-constancia-e2e/cypress.json",
+        "devServerTarget": "captura-constancia:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "captura-constancia:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/captura-constancia-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["captura-constancia"]
+}

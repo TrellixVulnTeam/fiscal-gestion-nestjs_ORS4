@@ -1,0 +1,28 @@
+{
+  "root": "apps/domicilios-e2e",
+  "sourceRoot": "apps/domicilios-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/domicilios-e2e/cypress.json",
+        "devServerTarget": "domicilios:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "domicilios:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/domicilios-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["domicilios"]
+}

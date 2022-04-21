@@ -1,0 +1,24 @@
+[
+  {
+    "name": "rfcs",
+    "type": "mssql",
+    "host": "10.128.160.55",
+    "username": "cfdiTools",
+    "password": "Alliax$2014",
+    "database": "CfdiTools",
+    "requestTimeout": 360000,
+    "synchronize": false,
+    "options": { "trustServerCertificate": true }
+  },
+  {
+    "name": "eslabon",
+    "type": "mssql",
+    "host": "10.128.162.80",
+    "username": "Alliax_Eforms",
+    "password": "Allai_eforms14",
+    "database": "eslabon_base_alliaxSA",
+    "requestTimeout": 360000,
+    "synchronize": false,
+    "options": { "trustServerCertificate": true }
+  }
+]

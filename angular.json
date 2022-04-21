@@ -1,0 +1,13 @@
+{
+  "cli": {
+    "analytics": false
+  },
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "captura-constancia": "apps/captura-constancia",
+    "captura-constancia-e2e": "apps/captura-constancia-e2e",
+    "domicilios": "apps/domicilios",
+    "domicilios-e2e": "apps/domicilios-e2e"
+  }
+}
