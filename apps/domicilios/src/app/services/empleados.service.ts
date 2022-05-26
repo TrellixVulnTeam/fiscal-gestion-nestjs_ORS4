@@ -40,7 +40,32 @@ export class EmpleadosService {
   private readonly empleados$: BehaviorSubject<Empleado[]> =
     new BehaviorSubject<Empleado[]>([]);
 
-  graficaPie$ = this.empleados$.pipe(
+  // graficaPie$ = this.empleados$.pipe(
+  //   map((empleados) => {
+  //     const pendientes = empleados.filter(
+  //       (empleado) => empleado.validado !== true
+  //     );
+  //     const iguales = empleados.filter(
+  //       (empleado) =>
+  //         empleado.validado === true && empleado.diferenciaCP !== true
+  //     );
+  //     const diferentes = empleados.filter(
+  //       (empleado) =>
+  //         empleado.validado === true && empleado.diferenciaCP === true
+  //     );
+
+  //     const data: ChartData<'pie', number[], string | string[]> = {
+  //       labels: [['CP Incorrectos'], ['CP Correctos'], ['Sin procesar']],
+  //       datasets: [
+  //         {
+  //           data: [diferentes.length, iguales.length, pendientes.length],
+  //         },
+  //       ],
+  //     };
+  //     return data;
+  //   })
+  // );
+  graficaPieCP$ = this.empleados$.pipe(
     map((empleados) => {
       const pendientes = empleados.filter(
         (empleado) => empleado.validado !== true
@@ -66,6 +91,31 @@ export class EmpleadosService {
     })
   );
 
+  graficaPieNombre$ = this.empleados$.pipe(
+    map((empleados) => {
+      const pendientes = empleados.filter(
+        (empleado) => empleado.validado !== true
+      );
+      const iguales = empleados.filter(
+        (empleado) =>
+          empleado.validado === true && empleado.diferenciaNombre !== true
+      );
+      const diferentes = empleados.filter(
+        (empleado) =>
+          empleado.validado === true && empleado.diferenciaNombre === true
+      );
+
+      const data: ChartData<'pie', number[], string | string[]> = {
+        labels: [['Nombre Incorrecto'], ['Nombre Correcto'], ['Sin procesar']],
+        datasets: [
+          {
+            data: [diferentes.length, iguales.length, pendientes.length],
+          },
+        ],
+      };
+      return data;
+    })
+  );
   constructor(private http: HttpClient) {}
 
   selectAll(): Observable<Empleado[]> {
