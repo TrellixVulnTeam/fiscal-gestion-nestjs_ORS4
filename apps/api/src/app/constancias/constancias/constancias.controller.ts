@@ -11,10 +11,10 @@ export class ConstanciaController {
     return this.constService.getReporte(empresa);
   }
 
-  @Post('email')
-  saveEmailDiferencia(@Body() email : string){
-    console.log('post email', email);
-    return this.constService.saveEmailDiferencia(email)
-  }
+  // @Post('email')
+  // saveEmailDiferencia(@Body() email : string){
+  //   console.log('post email', email);
+  //   return this.constService.saveEmailDiferencia(email)
+  // }
 
 }

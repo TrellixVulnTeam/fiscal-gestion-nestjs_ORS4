@@ -5,13 +5,10 @@ import { RfcsService } from './rfcs.service';
 export class RfcsController {
   constructor(private readonly rfcsService: RfcsService) {}
 
-  //  @Post('listado')
-  //  findAll(@Body('rfcs') rfcs: string[]) {
-  //    return this.rfcsService.findAll(rfcs);
-  //  }
-
   @Post()
   postOne(@Body() empleado: any){
+    console.log(empleado);
+    
     return this.rfcsService.postOne([empleado]);
   }
 
@@ -20,10 +17,8 @@ export class RfcsController {
     return this.rfcsService.findOne(rfc);
   }
 
-  // @Get('/empresa/:empresa')
-  // getReporte(@Query('empresa') empresa: string) {
-  //   console.log('get works', empresa);
-
-  //   return this.rfcsService.getReporte(empresa);
-  // }
+  @Get(':rfc')
+  findAll(@Param('rfc') rfc: string) {
+    return this.rfcsService.findOne(rfc);
+  }
 }

@@ -8,10 +8,10 @@ import { MailService } from "./mail.service";
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
+  // @Post()
+  // create(@Body() createUserDto: CreateUserDto) {
+  //   return this.usersService.create(createUserDto);
+  // }
   @Get()
   findAll() {
     return this.usersService.findAll();
@@ -37,11 +37,11 @@ export class UsersController {
   export class MailController {
   constructor(private readonly mailService: MailService) {}
 
-  @Post('send')
-  async sendEmail(@Query('email') email, @Query('name') name) {
-    console.log(email,name,);
+  @Post('/name/email')
+  sendEmail(@Body() email : string) {
     
-  return await this.mailService.sendMail(email, name);
-    }
+    console.log('Post nuevo email', email);
+    return this.mailService.sendMail(email);
+  }
 }
 

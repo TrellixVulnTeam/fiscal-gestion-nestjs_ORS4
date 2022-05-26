@@ -35,7 +35,7 @@ export class RfcsService {
   async postOne(empleado: any) {
 
     const results = await this.Rfc.query(
-      'EXEC postRfcInfo @0, @1, @2, @3, @4, @5, @6, @7, @8, @9 ,@10 ,@11 ,@12,@13,@14,@15',
+      'EXEC postRfcInfo @0, @1, @2, @3, @4, @5, @6, @7, @8, @9 ,@10 ,@11 ,@12, @13, @14, @15',
       [
         empleado[0].idEmpresa,
         empleado[0].NumEmp,

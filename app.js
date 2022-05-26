@@ -3,17 +3,12 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const configMensaje = require('./configMensaje');
 
-
-
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors())
 
 
 app.post('/formulario', (req, res) => {
-
-    //res.header("Access-Control-Allow-Origin", "localhost:3000");
 
     configMensaje(req.body);
 
